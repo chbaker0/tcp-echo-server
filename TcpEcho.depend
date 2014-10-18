@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1413613562 source:d:\development\projects\tcpecho\main.cpp
+	<iostream>
+	<array>
+	<vector>
+	<exception>
+	<functional>
+	<memory>
+	<boost/asio.hpp>
+
