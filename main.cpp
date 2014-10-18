@@ -7,6 +7,8 @@
 #include <functional>
 #include <memory>
 
+#include <cstdlib>
+
 #include <boost/asio.hpp>
 
 class tcp_echo_connection : public std::enable_shared_from_this<tcp_echo_connection>
@@ -91,13 +93,17 @@ private:
     boost::asio::ip::tcp::acceptor acceptor;
 };
 
-int main()
+int main(int argc, char* argv[])
 {
     using namespace boost::asio::ip;
+
+    unsigned int listen_port = 110;
+    if(argc > 1)
+        listen_port = std::strtol(argv[1], nullptr, 10);
     try
     {
         boost::asio::io_service io_service;
-        tcp_echo_server srv(io_service, tcp::endpoint(tcp::v4(), 110));
+        tcp_echo_server srv(io_service, tcp::endpoint(tcp::v4(), listen_port));
         io_service.run();
     }
     catch(std::exception& e)
